@@ -8,6 +8,9 @@ import OpenInNew from '@mui/icons-material/OpenInNew';
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Symposium from "../interfaces/Symposium"
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from "@mui/material";
+
 // import { Divider } from "@mui/material";
 
 function Row({event}: {event: Symposium}) {
@@ -23,7 +26,7 @@ function Row({event}: {event: Symposium}) {
                         <Grid container spacing={0}>
                             <Grid xs={6}>
                                 <Typography>
-                                    {event.title}
+                                    {event.title} ({event.id})
                                 </Typography>
                             </Grid>
                             <Grid xs={4}>
@@ -67,6 +70,15 @@ function Row({event}: {event: Symposium}) {
                                     Aller sur la page de l'event
                                 </Button>
                             </Grid>
+                            <IconButton
+                                style={{ position: "absolute", right:5, bottom:5}}
+                                aria-label="delete"
+                                size="small"
+                                onClick={ () => alert("cliqué !") }
+                                color="error"
+                            >
+                                <DeleteIcon />
+                            </IconButton>
                         </Grid>
                     </AccordionDetails>
                 </Accordion>
