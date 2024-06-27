@@ -14,7 +14,7 @@ import { useState } from "react";
 import { Done } from "@mui/icons-material";
 
 
-function Row({event, deleteEvent, readEvent, editEvent}: RowProps) {
+function Row({event, deleteEvent, readEvent, editEvent, time}: RowProps) {
     const [date, setDate] = useState('');
 
     return (
@@ -29,18 +29,18 @@ function Row({event, deleteEvent, readEvent, editEvent}: RowProps) {
                     >
                         <Grid container spacing={0}>
                             <Grid xs={6}>
-                                <Typography fontWeight={event.unread ? 600 : 400}>
+                                <Typography color={time === "past" ? "grey" : ""} fontWeight={event.unread ? 600 : 400}>
                                     {event.title} ({event.id})
                                 </Typography>
                             </Grid>
                             <Grid xs={2}>
-                                <Typography fontWeight={event.unread ? 600 : 200}>
+                                <Typography color={time === "past" ? "grey" : ""} fontWeight={event.unread ? 600 : 200}>
                                     {event.source}
                                 </Typography>
                             </Grid>
                             <Grid xs={4}>
                                 {event.date
-                                    ? <Typography fontWeight={event.unread ? 600 : 200}>{event.date}</Typography>
+                                    ? <Typography color={time === "past" ? "grey" : ""} fontWeight={event.unread ? 600 : 200}>{event.date}</Typography>
                                     : <Typography color="error" fontWeight={event.unread ? 600 : 200}>
                                         Date Manquante : <input type="date" placeholder="Date manquante" value={date} onChange={event => setDate(event.target.value)} />
                                         <IconButton
@@ -62,7 +62,7 @@ function Row({event, deleteEvent, readEvent, editEvent}: RowProps) {
                     <AccordionDetails>
                         <Grid container spacing={0}>
                             <Grid xs={8}>
-                                <Typography paddingRight={9}>
+                                <Typography color={time === "past" ? "grey" : ""} paddingRight={9}>
                                     <strong>Notes :</strong> Description bla blabla sur les
                                     caractéristiques de l'event. Qques notes que
                                     l'utilisateur a prises pour se rappeler des

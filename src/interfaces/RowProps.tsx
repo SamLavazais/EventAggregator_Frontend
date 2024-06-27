@@ -5,4 +5,5 @@ export default interface RowProps {
     deleteEvent: (event: Symposium) => Promise<void>;
     readEvent: (event: Symposium) => Promise<void>;
     editEvent: (event: Symposium, date: string) => Promise<void>;
+    time?: "past" | "future";
 }

@@ -59,7 +59,6 @@ function EventList() {
     async function editEvent(event: Symposium, date: string) {
         let formData = new FormData();
         formData.append("date", date);
-        alert(date)
 
         let options = {
             method: "PATCH",
@@ -94,6 +93,7 @@ function EventList() {
                 .map((event: Symposium) => {
                     return (
                         <Row
+                            time={dayjs(event.date).isBefore(dayjs()) ? "past" : "future"}
                             event={event}
                             key={event.id}
                             deleteEvent={(event) => deleteEvent(event)}
