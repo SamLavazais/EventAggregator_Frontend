@@ -8,7 +8,7 @@ import OpenInNew from '@mui/icons-material/OpenInNew';
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from "@mui/material";
+import { Container, IconButton, Stack } from "@mui/material";
 import RowProps from "../interfaces/RowProps";
 import { useState } from "react";
 import { Done } from "@mui/icons-material";
@@ -42,15 +42,7 @@ function Row({event, deleteEvent, readEvent, editEvent, time}: RowProps) {
                                 {event.date
                                     ? <Typography color={time === "past" ? "grey" : ""} fontWeight={event.unread ? 600 : 200}>{event.date}</Typography>
                                     : <Typography color="error" fontWeight={event.unread ? 600 : 200}>
-                                        Date Manquante : <input type="date" placeholder="Date manquante" value={date} onChange={event => setDate(event.target.value)} />
-                                        <IconButton
-                                            aria-label="dater"
-                                            size="small"
-                                            color="success"
-                                            onClick={ () => editEvent(event, date) }
-                                        >
-                                            <Done/>
-                                        </IconButton>
+                                        Date manquante
                                     </Typography>
                                 }
                             </Grid>
@@ -63,32 +55,38 @@ function Row({event, deleteEvent, readEvent, editEvent, time}: RowProps) {
                         <Grid container spacing={0}>
                             <Grid xs={8}>
                                 <Typography color={time === "past" ? "grey" : ""} paddingRight={9}>
-                                    <strong>Notes :</strong> Description bla blabla sur les
-                                    caractéristiques de l'event. Qques notes que
-                                    l'utilisateur a prises pour se rappeler des
-                                    éléments omportants concernant cet event.
-                                    Description bla blabla sur les
-                                    caractéristiques de l'event. Qques notes que
-                                    l'utilisateur a prises pour se rappeler des
-                                    éléments omportants concernant cet
-                                    event.Description bla blabla sur les
-                                    caractéristiques de l'event.
+                                    <strong>Notes :</strong> <em>L'utilisateur pourra ajouter une courte description ici s'il le souhaite (remarques, infos complémentaires...)</em>
                                 </Typography>
                             </Grid>
                             <Grid xs={4}>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    disableElevation
-                                    size="large"
-                                    endIcon={<OpenInNew/>}
-                                    href={event.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={ () => readEvent(event) }
-                                >
-                                    Aller sur la page de l'event
-                                </Button>
+                                <Stack>
+                                    <Container>
+                                        <Typography>
+                                            Indiquer la date : <input type="date" placeholder="Date manquante" value={date} onChange={event => setDate(event.target.value)} />
+                                            <IconButton
+                                                aria-label="dater"
+                                                size="small"
+                                                color="success"
+                                                onClick={ () => editEvent(event, date) }
+                                                >
+                                                <Done/>
+                                            </IconButton>
+                                        </Typography>
+                                    </Container>
+                                        <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        disableElevation
+                                        size="large"
+                                        endIcon={<OpenInNew/>}
+                                        href={event.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={ () => readEvent(event) }
+                                        >
+                                        Aller sur la page de l'event
+                                    </Button>
+                                </Stack>
                             </Grid>
                             <IconButton
                                 style={{ position: "absolute", right:5, bottom:5}}
