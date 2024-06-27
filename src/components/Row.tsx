@@ -19,7 +19,7 @@ function Row({event, deleteEvent, readEvent, editEvent}: RowProps) {
 
     return (
         <div>
-            <Paper variant="outlined" elevation={2}>
+            <Paper variant="elevation" elevation={2}>
                 <Accordion >
 
                     <AccordionSummary

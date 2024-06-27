@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 // import { Paper } from "@mui/material";
 import Symposium from "../interfaces/Symposium";
 import useSWR from "swr";
+import dayjs from "dayjs";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -14,45 +15,58 @@ import useSWR from "swr";
 // }));
 
 function fetcher(url: string) {
-    return fetch(url).then((res) => res.json());
+    return fetch(url)
+        .then((res) => res.json())
+        .then((data) => date_parser(data));
 }
 
+function date_parser(data: Array<Symposium>): Array<Symposium> {
+    for (let record of data) {
+        record.date = record.date
+            ? dayjs(record.date).format("YYYY-MM-DD")
+            : null;
+    }
+    return data;
+}
 
 function EventList() {
     const {
         data: events,
         error: error,
         isLoading: isLoading,
-        mutate: mutateList
+        mutate: mutateList,
     } = useSWR("http://localhost:5001/events", fetcher);
 
     async function deleteEvent(event: Symposium) {
-        await fetch(`http://localhost:5001/events/${event.id}`, { method: "DELETE"})
-        mutateList()
+        await fetch(`http://localhost:5001/events/${event.id}`, {
+            method: "DELETE",
+        });
+        mutateList();
     }
 
     async function readEvent(event: Symposium) {
-        let formData = new FormData()
-        formData.append('unread', '')
+        let formData = new FormData();
+        formData.append("unread", "");
 
         let options = {
             method: "PATCH",
-            body: formData
-        }
-        await fetch(`http://localhost:5001/events/${event.id}`, options)
-        mutateList()
+            body: formData,
+        };
+        await fetch(`http://localhost:5001/events/${event.id}`, options);
+        mutateList();
     }
 
     async function editEvent(event: Symposium, date: string) {
-        let formData = new FormData()
-        formData.append('date', date)
+        let formData = new FormData();
+        formData.append("date", date);
+        alert(date)
 
         let options = {
             method: "PATCH",
-            body: formData
-        }
-        await fetch(`http://localhost:5001/events/${event.id}`, options)
-        mutateList()
+            body: formData,
+        };
+        await fetch(`http://localhost:5001/events/${event.id}`, options);
+        mutateList();
     }
 
     // Handles error and loading state
@@ -61,15 +75,33 @@ function EventList() {
 
     return (
         <Stack spacing={2}>
-            {events.map((event: Symposium) => {
-                return <Row
+            {(events as Array<Symposium>)
+                .filter((event) => !event.date)
+                .map((event: Symposium) => {
+                    return (
+                        <Row
                             event={event}
                             key={event.id}
                             deleteEvent={(event) => deleteEvent(event)}
-                            readEvent= {(event) => readEvent(event)}
-                            editEvent= {(event, date) => editEvent(event, date)}
-                        />;
-            })}
+                            readEvent={(event) => readEvent(event)}
+                            editEvent={(event, date) => editEvent(event, date)}
+                        />
+                    );
+                })}
+            {(events as Array<Symposium>)
+                .filter((event) => event.date)
+                .toSorted((a: Symposium, b: Symposium) => dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1)
+                .map((event: Symposium) => {
+                    return (
+                        <Row
+                            event={event}
+                            key={event.id}
+                            deleteEvent={(event) => deleteEvent(event)}
+                            readEvent={(event) => readEvent(event)}
+                            editEvent={(event, date) => editEvent(event, date)}
+                        />
+                    );
+                })}
         </Stack>
     );
 }
