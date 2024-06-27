@@ -10,10 +10,13 @@ import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from "@mui/material";
 import RowProps from "../interfaces/RowProps";
+import { useState } from "react";
+import { Done } from "@mui/icons-material";
 
 
-function Row({event, deleteEvent, readEvent}: RowProps) {
-    
+function Row({event, deleteEvent, readEvent, editEvent}: RowProps) {
+    const [date, setDate] = useState('');
+
     return (
         <div>
             <Paper variant="outlined" elevation={2}>
@@ -36,9 +39,20 @@ function Row({event, deleteEvent, readEvent}: RowProps) {
                                 </Typography>
                             </Grid>
                             <Grid xs={4}>
-                                <Typography color={"#f44336"} fontWeight={event.unread ? 600 : 200}>
-                                    {event.date}
-                                </Typography>
+                                {event.date
+                                    ? <Typography fontWeight={event.unread ? 600 : 200}>{event.date}</Typography>
+                                    : <Typography color="error" fontWeight={event.unread ? 600 : 200}>
+                                        Date Manquante : <input type="date" placeholder="Date manquante" value={date} onChange={event => setDate(event.target.value)} />
+                                        <IconButton
+                                            aria-label="dater"
+                                            size="small"
+                                            color="success"
+                                            onClick={ () => editEvent(event, date) }
+                                        >
+                                            <Done/>
+                                        </IconButton>
+                                    </Typography>
+                                }
                             </Grid>
                         </Grid>
                     </AccordionSummary>

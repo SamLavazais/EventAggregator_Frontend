@@ -43,6 +43,18 @@ function EventList() {
         mutateList()
     }
 
+    async function editEvent(event: Symposium, date: string) {
+        let formData = new FormData()
+        formData.append('date', date)
+
+        let options = {
+            method: "PATCH",
+            body: formData
+        }
+        await fetch(`http://localhost:5001/events/${event.id}`, options)
+        mutateList()
+    }
+
     // Handles error and loading state
     if (error) return <div className="failed">failed to load</div>;
     if (isLoading) return <div className="Loading">Loading...</div>;
@@ -55,6 +67,7 @@ function EventList() {
                             key={event.id}
                             deleteEvent={(event) => deleteEvent(event)}
                             readEvent= {(event) => readEvent(event)}
+                            editEvent= {(event, date) => editEvent(event, date)}
                         />;
             })}
         </Stack>
