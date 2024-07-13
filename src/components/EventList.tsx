@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Symposium from "../interfaces/Symposium";
 import useSWR from "swr";
 import dayjs from "dayjs";
-import process from "process";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
