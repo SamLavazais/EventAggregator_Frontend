@@ -74,6 +74,7 @@ function Row({event, deleteEvent, readEvent, editEvent, time}: RowProps) {
                                         </Typography>
                                     </Container>
                                         <Button
+                                        sx={{ width: '80%' }}
                                         variant="contained"
                                         color="secondary"
                                         disableElevation

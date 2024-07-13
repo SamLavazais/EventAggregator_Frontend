@@ -35,10 +35,10 @@ function EventList() {
         error: error,
         isLoading: isLoading,
         mutate: mutateList,
-    } = useSWR("http://localhost:5001/events", fetcher);
+    } = useSWR(`${process.env.BACKEND_API_URL}/events`, fetcher);
 
     async function deleteEvent(event: Symposium) {
-        await fetch(`http://localhost:5001/events/${event.id}`, {
+        await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, {
             method: "DELETE",
         });
         mutateList();
@@ -52,7 +52,7 @@ function EventList() {
             method: "PATCH",
             body: formData,
         };
-        await fetch(`http://localhost:5001/events/${event.id}`, options);
+        await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, options);
         mutateList();
     }
 
@@ -64,7 +64,7 @@ function EventList() {
             method: "PATCH",
             body: formData,
         };
-        await fetch(`http://localhost:5001/events/${event.id}`, options);
+        await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, options);
         mutateList();
     }
 
