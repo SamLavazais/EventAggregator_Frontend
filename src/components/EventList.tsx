@@ -35,7 +35,7 @@ function EventList() {
         error: error,
         isLoading: isLoading,
         mutate: mutateList,
-    } = useSWR(`${process.env.REACT_APP_BACKEND_API_URL as string}/events`, fetcher);
+    } = useSWR(`${process.env.REACT_APP_BACKEND_API_URL}/events`, fetcher);
 
     async function deleteEvent(event: Symposium) {
         await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/events/${event.id}`, {
