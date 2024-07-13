@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Symposium from "../interfaces/Symposium";
 import useSWR from "swr";
 import dayjs from "dayjs";
+import process from "process";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -52,7 +53,10 @@ function EventList() {
             method: "PATCH",
             body: formData,
         };
-        await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, options);
+        await fetch(
+            `${process.env.BACKEND_API_URL}/events/${event.id}`,
+            options
+        );
         mutateList();
     }
 
@@ -64,7 +68,10 @@ function EventList() {
             method: "PATCH",
             body: formData,
         };
-        await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, options);
+        await fetch(
+            `${process.env.BACKEND_API_URL}/events/${event.id}`,
+            options
+        );
         mutateList();
     }
 
@@ -89,11 +96,17 @@ function EventList() {
                 })}
             {(events as Array<Symposium>)
                 .filter((event) => event.date)
-                .toSorted((a: Symposium, b: Symposium) => dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1)
+                .toSorted((a: Symposium, b: Symposium) =>
+                    dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1
+                )
                 .map((event: Symposium) => {
                     return (
                         <Row
-                            time={dayjs(event.date).isBefore(dayjs()) ? "past" : "future"}
+                            time={
+                                dayjs(event.date).isBefore(dayjs())
+                                    ? "past"
+                                    : "future"
+                            }
                             event={event}
                             key={event.id}
                             deleteEvent={(event) => deleteEvent(event)}
