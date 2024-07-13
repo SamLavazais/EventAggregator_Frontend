@@ -35,7 +35,7 @@ function EventList() {
         error: error,
         isLoading: isLoading,
         mutate: mutateList,
-    } = useSWR(`${process.env.BACKEND_API_URL}/events`, fetcher);
+    } = useSWR(`${process.env.BACKEND_API_URL as string}/events`, fetcher);
 
     async function deleteEvent(event: Symposium) {
         await fetch(`${process.env.BACKEND_API_URL}/events/${event.id}`, {
