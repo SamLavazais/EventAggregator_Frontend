@@ -80,6 +80,7 @@ function EventList() {
 
     return (
         <Stack spacing={2}>
+            L'URL fetchée : {process.env.BACKEND_API_URL}
             {(events as Array<Symposium>)
                 .filter((event) => !event.date)
                 .map((event: Symposium) => {
