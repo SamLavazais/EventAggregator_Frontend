@@ -6,7 +6,7 @@ function App() {
         <>
             <div>
                 <h1>Bienvenue !</h1>
-                L'URL fetchée : {import.meta.env.REACT_APP_BACKEND_API_URL}
+                L'URL fetchée : {import.meta.env.VITE_BACKEND_API_URL}
                 {/* <TestComponent /> */}
                 <EventList></EventList>
             </div>

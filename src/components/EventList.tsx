@@ -35,11 +35,11 @@ function EventList() {
         error: error,
         isLoading: isLoading,
         mutate: mutateList,
-    } = useSWR(`${import.meta.env.REACT_APP_BACKEND_API_URL}/events`, fetcher);
+    } = useSWR(`${import.meta.env.VITE_BACKEND_API_URL}/events`, fetcher);
 
     async function deleteEvent(event: Symposium) {
         await fetch(
-            `${import.meta.env.REACT_APP_BACKEND_API_URL}/events/${event.id}`,
+            `${import.meta.env.VITE_BACKEND_API_URL}/events/${event.id}`,
             {
                 method: "DELETE",
             }
@@ -56,7 +56,7 @@ function EventList() {
             body: formData,
         };
         await fetch(
-            `${import.meta.env.REACT_APP_BACKEND_API_URL}/events/${event.id}`,
+            `${import.meta.env.VITE_BACKEND_API_URL}/events/${event.id}`,
             options
         );
         mutateList();
@@ -71,7 +71,7 @@ function EventList() {
             body: formData,
         };
         await fetch(
-            `${import.meta.env.REACT_APP_BACKEND_API_URL}/events/${event.id}`,
+            `${import.meta.env.VITE_BACKEND_API_URL}/events/${event.id}`,
             options
         );
         mutateList();
