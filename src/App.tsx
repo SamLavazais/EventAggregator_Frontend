@@ -5,8 +5,7 @@ function App() {
     return (
         <>
             <div>
-                <h1>Bienvenue !</h1>
-                {/* <TestComponent /> */}
+                <h1>EVENT AGGREGATOR : une seule interface pour toutes vos actualités santé</h1>
                 <EventList></EventList>
             </div>
         </>
