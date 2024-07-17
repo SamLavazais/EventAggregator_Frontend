@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# EventAggregator
+*Note : ce repo contient la partie front-end de ce projet.*
+- *La partie back-end peut être trouvée à cette adresse : https://github.com/SamLavazais/EventAggregator*
+- *Ce projet a été déployé via Heroku et l'application est disponible à cette adresse : https://event-aggregator-c75b84a27e9e.herokuapp.com/*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Avancement actuel du projet
 
-Currently, two official plugins are available:
+- Scripts de webscraping : 6/9
+- Front-end : interface fonctionnelle
+- Back-end : API fonctionnelle & webscraping fonctionnel
+- DB : simple fichier JSON pour le moment
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prochaines étapes :
+- Compléter l'UI : barre de navigation, affiche responsive...
+- Implémenter des tests + CI/CD
+- Implémenter une DB PostgreSQL
+- Ecrire les 3 derniers scripts de webscraping
+- Améliorer l'architecture du projet
 
-## Expanding the ESLint configuration
+## Objectifs du projet
+- Data pipeline qui aspire, processe/uniformise & stocke en DB les données issues de 9 sites web différents
+- Automatisation de la pipeline- API back-end pour manipuler les données stockées
+- Interface client permettant d'afficher et gérer la liste d'events
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Stack technique
+- Webscraping : Python - beautifulsoup & pandas
+- API Back-end : Python, Flask
+- Interface Front-end : TypeScript React
+- Deploiement : Github, Heroku
